@@ -125,7 +125,7 @@ export class UsuariosComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-       this.actualizarc();
+        this.getUsuario();
       
       }
     )
@@ -135,6 +135,49 @@ export class UsuariosComponent implements OnInit {
     this.recargarC = this.recargarC * -1 +1 ;
   }
 
+  deleteUser(id) {
+    Swal.fire({
+      title: '¿Estas seguro de eliminar este Contacto?',
+      text: '¡No podras revertir los cambios!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.sUsuario.eliminarUsuario(id, this.token).subscribe(
+          (response) => {
+            console.log(response);
+            this.getUsuario();
+            Swal.fire(
+              'Eliminado',
+              'Se ha eliminado el hotel correctamente',
+              'success'
+            );
+          },
+          (error) => {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+              },
+            });
+
+            Toast.fire({
+              icon: 'error',
+              title: error.error.mensaje,
+            });
+          }
+        );
+      }
+    });
+  }
   SetID(_id){
     this.idUser = _id;
     console.log(this.idUser)
