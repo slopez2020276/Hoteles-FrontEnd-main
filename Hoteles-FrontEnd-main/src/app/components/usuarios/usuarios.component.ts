@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Usuario } from 'src/app/models/usuario.model';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
@@ -13,11 +14,20 @@ import Swal from 'sweetalert2';
 export class UsuariosComponent implements OnInit {
   public usuarioModelGet: Usuario;
   public usuarioModelPost: Usuario;
+  public usuarioModelGetId : Usuario;
+  public usuarioModelPUT: Usuario;
   public searchUsuario;
   public token;
+  public identidad;
+  public isAuthenticated: Observable<any>;
+  public role: string;
+  public perfilModelGetId: Usuario;
+  public perfilModelGet: Usuario;
+  public idUser
+  public recargarC =- 0
+  constructor(  public sUsuario: UsuarioService,
 
-  constructor( 
-    public sUsuario: UsuarioService,
+    
     private _router: Router
              ) {
 
@@ -37,13 +47,48 @@ export class UsuariosComponent implements OnInit {
                 '',
                 [{}]
               );
+              this.usuarioModelGetId = new Usuario(
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                [{}]
+              );
 
               this.token = this.sUsuario.getToken();
+              sUsuario.isAuthenticated.subscribe(token => {
+                this.isAuthenticated = token;
+              });
+          
+              sUsuario.roleUpdated.subscribe(role => {
+                this.role = role;
+              });
    
             }
 
   ngOnInit(): void {
     this.getUsuario();
+    this.setIdentidad();
+  }
+  getUsuarioL() {
+    this.sUsuario.usuarioLogeado(this.token).subscribe(
+      (response) => {
+        this.perfilModelGet = response.usario;
+        console.log(response);
+      },
+      (error) => {
+        console.log(<any>error)
+      }
+    )
   }
 
   getUsuario() {
@@ -57,6 +102,43 @@ export class UsuariosComponent implements OnInit {
       }
     )
   }
+  getUsuarioId(idUser){
+    this.sUsuario.getUserID(idUser).subscribe(
+      (response)=>{
+        console.log(response);
+       this.usuarioModelGetId = response.usuario
+      },
+      (error)=>{
+        console.log(error);
+      }
+    )
+  }
+  setIdentidad(){
+    this.identidad = localStorage.getItem('identidad') 
+    console.log(this.identidad.rol)
+  }
+
+  putUser() {
+    this.sUsuario.editarUsuario(this.usuarioModelGetId).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+       this.actualizarc();
+      
+      }
+    )
+  }
+  
+  actualizarc(){
+    this.recargarC = this.recargarC * -1 +1 ;
+  }
+
+  SetID(_id){
+    this.idUser = _id;
+    console.log(this.idUser)
+  }
 
   postGerente() {
     this.sUsuario.registrarGerente(this.usuarioModelPost).subscribe(
@@ -66,13 +148,6 @@ export class UsuariosComponent implements OnInit {
         this.usuarioModelPost.nombre = '';
         this.usuarioModelPost.email = '';
         this.usuarioModelPost.password = '';
-        this.usuarioModelPost.usuario = '';
-        this.usuarioModelPost.puesto = '';
-        this.usuarioModelPost.departamento = '';
-        this.usuarioModelPost.celular_corporativo = '';
-        this.usuarioModelPost.extencion = '';
-        this.usuarioModelPost.sucursal = '';
-        this.usuarioModelPost.pais = '';
         Swal.fire({
           icon: 'success',
           title: 'Registro completado con exito',

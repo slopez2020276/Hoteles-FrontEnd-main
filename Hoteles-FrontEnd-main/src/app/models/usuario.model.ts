@@ -1,4 +1,5 @@
 export class Usuario {
+  static _id: string;
   constructor(
     public _id: String,
     public nombre: String,
@@ -9,7 +10,7 @@ export class Usuario {
     public rol: String,
     public puesto : String,
     public departamento : String,
-    public celular_corporativo  : String,
+    public celular_Corporativo : String,
     public extencion : String,
     public sucursal : String,
     public pais : String,

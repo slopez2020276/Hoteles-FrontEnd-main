@@ -30,6 +30,7 @@ import { ReservacionComponent } from './components/reservacion/reservacion.compo
 import { CuentaComponent } from './components/cuenta/cuenta.component';
 import { SearchUsuarioPipe } from './pipes/search-usuario.pipe';
 import { BuscarUsuarioComponent } from './components/buscar-usuario/buscar-usuario.component';
+import { RecargaDirective } from './directivas/recarga.directive';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { BuscarUsuarioComponent } from './components/buscar-usuario/buscar-usuar
     ReservacionComponent,
     CuentaComponent,
     SearchUsuarioPipe,
-    BuscarUsuarioComponent
+    BuscarUsuarioComponent,
+    RecargaDirective
   ],
 
   imports: [

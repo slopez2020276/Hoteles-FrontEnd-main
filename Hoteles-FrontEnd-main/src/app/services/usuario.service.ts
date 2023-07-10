@@ -64,6 +64,10 @@ export class UsuarioService {
     }));
   }
 
+  getUserID(idUser):Observable<any>{
+    return this._http.get(this.url + '/obtenerUsuarioId/' + idUser, { headers: this.headersVariable });
+    
+  }
   getToken() {
     var token2 = localStorage.getItem('token');
     if (token2 != undefined) {
@@ -111,7 +115,12 @@ export class UsuarioService {
     let headersToken = this.headersVariable.set('Authorization', token);
     return this._http.delete(this.url + '/eliminarUsuario/' + idUsuario, { headers: headersToken });
   }
+  editarUsuario(modeloUsuario: Usuario): Observable<any> {
+    let parametro = JSON.stringify(modeloUsuario);
 
+    return this._http.put(this.url + '/editarUsuario/' + modeloUsuario._id, parametro, { headers: this.headersVariable})
+  }
+ 
   clearToken() {
     localStorage.clear();
 

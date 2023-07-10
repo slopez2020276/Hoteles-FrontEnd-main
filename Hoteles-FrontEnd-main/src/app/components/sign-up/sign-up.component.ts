@@ -14,7 +14,7 @@ export class SignUpComponent implements OnInit {
   public token;
 
   constructor(private _usuarioService: UsuarioService, public _router: Router) {
-    this.usuarioModelPost = new Usuario( '',
+    this.usuarioModelPost = new Usuario( 
     '',
     '',
     '',
@@ -26,7 +26,9 @@ export class SignUpComponent implements OnInit {
     '',
     '',
     '',
-    '', [{}]);
+    '',
+    '',
+     [{}]);
   }
 
   ngOnInit(): void {
@@ -42,6 +44,13 @@ export class SignUpComponent implements OnInit {
         this.usuarioModelPost.email = '';
         this.usuarioModelPost.password = '';
         this.usuarioModelPost.rol = '';
+        this.usuarioModelPost.extencion = '';
+        this.usuarioModelPost.pais= '';
+        this.usuarioModelPost.puesto = '',
+        this.usuarioModelPost.departamento= '';
+        this.usuarioModelPost.celular_Corporativo
+
+        
         this._router.navigate(['/sign-in']);
         Swal.fire({
           icon: 'success',
