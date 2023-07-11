@@ -31,6 +31,7 @@ import { CuentaComponent } from './components/cuenta/cuenta.component';
 import { SearchUsuarioPipe } from './pipes/search-usuario.pipe';
 import { BuscarUsuarioComponent } from './components/buscar-usuario/buscar-usuario.component';
 import { RecargaDirective } from './directivas/recarga.directive';
+import { UsersNombrePipe } from './users-nombre.pipe';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { RecargaDirective } from './directivas/recarga.directive';
     CuentaComponent,
     SearchUsuarioPipe,
     BuscarUsuarioComponent,
-    RecargaDirective
+    RecargaDirective,
+    UsersNombrePipe
   ],
 
   imports: [

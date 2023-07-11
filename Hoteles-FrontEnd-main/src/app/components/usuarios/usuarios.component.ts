@@ -64,6 +64,22 @@ export class UsuariosComponent implements OnInit {
                 [{}]
               );
 
+              this.usuarioModelPost = new Usuario(
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                [{}]
+              );
               this.token = this.sUsuario.getToken();
               sUsuario.isAuthenticated.subscribe(token => {
                 this.isAuthenticated = token;
@@ -122,6 +138,8 @@ export class UsuariosComponent implements OnInit {
     this.sUsuario.editarUsuario(this.usuarioModelGetId).subscribe(
       (response) => {
         console.log(response);
+        this.getUsuario();
+      
       },
       (error) => {
         console.log(error);
@@ -183,25 +201,39 @@ export class UsuariosComponent implements OnInit {
     console.log(this.idUser)
   }
 
-  postGerente() {
-    this.sUsuario.registrarGerente(this.usuarioModelPost).subscribe(
+  postUser() {
+    this.sUsuario.registrarUsuario(this.usuarioModelPost).subscribe(
       (response) => {
         console.log(response);
         this.usuarioModelPost._id = '';
         this.usuarioModelPost.nombre = '';
+        this.usuarioModelPost.apellido = '';
         this.usuarioModelPost.email = '';
         this.usuarioModelPost.password = '';
+        this.usuarioModelPost.rol = '';
+        this.usuarioModelPost.extencion = '';
+        this.usuarioModelPost.pais= '';
+        this.usuarioModelPost.puesto = '',
+        this.usuarioModelPost.departamento= '';
+        this.usuarioModelPost.celular_Corporativo
+
+        
+        this.getUsuario()
         Swal.fire({
           icon: 'success',
           title: 'Registro completado con exito',
           showConfirmButton: false,
           timer: 1500,
         });
-        this._router.navigate(['/usuarios']);
       },
-
       (error) => {
-      console.log(error);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: error.error.mensaje,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     );
   }
