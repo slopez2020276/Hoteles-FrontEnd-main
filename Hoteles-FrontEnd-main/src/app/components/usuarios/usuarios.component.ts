@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Usuario } from 'src/app/models/usuario.model';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { Title } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -17,6 +18,8 @@ export class UsuariosComponent implements OnInit {
   public usuarioModelGetId : Usuario;
   public usuarioModelPUT: Usuario;
   public searchUsuario;
+  public searchPuesto;
+  public searchPais;
   public token;
   public identidad;
   public isAuthenticated: Observable<any>;
@@ -25,7 +28,7 @@ export class UsuariosComponent implements OnInit {
   public perfilModelGet: Usuario;
   public idUser
   public recargarC =- 0
-  constructor(  public sUsuario: UsuarioService,
+  constructor( private titule: Title, public sUsuario: UsuarioService,
 
     
     private _router: Router
@@ -88,8 +91,10 @@ export class UsuariosComponent implements OnInit {
               sUsuario.roleUpdated.subscribe(role => {
                 this.role = role;
               });
+              titule.setTitle('Usuarios')
    
             }
+           
 
   ngOnInit(): void {
     this.getUsuario();
@@ -215,7 +220,8 @@ export class UsuariosComponent implements OnInit {
         this.usuarioModelPost.pais= '';
         this.usuarioModelPost.puesto = '',
         this.usuarioModelPost.departamento= '';
-        this.usuarioModelPost.celular_Corporativo
+        this.usuarioModelPost.celular_Corporativo = '';
+        this.usuarioModelPost.sucursal = '',
 
         
         this.getUsuario()
@@ -237,4 +243,5 @@ export class UsuariosComponent implements OnInit {
       }
     );
   }
+  filterUserName = '';
 }

@@ -9,7 +9,7 @@ import { Factura } from '../models/factura.model';
 })
 
 export class CuentaService {
-  public url: String = 'http://localhost:3000/api';
+  public url: String = 'https://ssdfasdf.onrender.com/api';
   public headersVariable = new HttpHeaders().set(
     'Content-Type',
     'application/json'

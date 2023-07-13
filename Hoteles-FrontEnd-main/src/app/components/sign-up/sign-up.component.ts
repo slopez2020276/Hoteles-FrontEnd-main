@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/usuario.model';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { Title } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,7 +14,8 @@ export class SignUpComponent implements OnInit {
   public usuarioModelPost: Usuario;
   public token;
 
-  constructor(private _usuarioService: UsuarioService, public _router: Router) {
+  constructor(private title:Title, private _usuarioService: UsuarioService, public _router: Router) {
+    title.setTitle('sing-up')
     this.usuarioModelPost = new Usuario( 
     '',
     '',

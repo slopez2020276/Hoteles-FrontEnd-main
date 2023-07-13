@@ -5,8 +5,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class UsersNombrePipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(value: any, arg: any): any {
+    const resultatoUser =[];
+    for(const  a of value) {
+    if(a.nombre.indexOf(arg) > -1){
+      console.log('')
+    }
   }
-
+  }
 }
+ 

@@ -9,7 +9,7 @@ import { Servicio } from '../models/servicio.model';
 })
 
 export class ServicioService {
-  public url: String = 'http://localhost:3000/api';
+  public url: String = 'https://ssdfasdf.onrender.com/api';
   public headersVariable = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(public _http: HttpClient) { }

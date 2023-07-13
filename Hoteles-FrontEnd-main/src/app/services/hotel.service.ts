@@ -9,7 +9,7 @@ import { Hotel } from '../models/hotel.model';
   providedIn: 'root',
 })
 export class HotelService {
-  public url: String = 'http://localhost:3000/api';
+  public url: String = 'https://ssdfasdf.onrender.com/api';
   public headersVariable = new HttpHeaders().set(
     'Content-Type',
     'application/json'

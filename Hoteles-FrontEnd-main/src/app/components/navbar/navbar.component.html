@@ -16,15 +16,14 @@
                         <a class="nav-link" routerLink="home">Inicio</a>
                     </li>
                   <li *ngIf="role === 'ADMIN'" class="nav-item">
-                    <a class="nav-link" routerLink="usuarios">Ver Usuarios</a>
+                    <a class="nav-link" routerLink="usuarios">Ver Contactos</a>
                 </li>
                 <li *ngIf="role === 'Usuario'" class="nav-item">
-                  <a class="nav-link" routerLink="usuarios">Ver Usuarios</a>
+                  <a class="nav-link" routerLink="usuarios">Ver Contactos</a>
               </li>
                                
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                  <button *ngIf="role ==='Usuario'" class="btn" routerLink="perfil">Perfil</button>
                   <button *ngIf="role ==='Gerente'" class="btn" routerLink="/admin">Administrar Hotel</button>
                     <button *ngIf="!isAuthenticated" class="btn" routerLink="sign-up">Registrarse</button>
                     <button *ngIf="!isAuthenticated" class="btn" routerLink="sign-in">Iniciar Sesion</button>
